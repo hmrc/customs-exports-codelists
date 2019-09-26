@@ -17,17 +17,14 @@
 package uk.gov.hmrc.customsexportscodelists.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.libs.json.{JsArray, JsString, Json}
+import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
 import uk.gov.hmrc.customsexportscodelists.Countries._
-import uk.gov.hmrc.customsexportscodelists.config.AppConfig
-import uk.gov.hmrc.customsexportscodelists.models.Country
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-import scala.concurrent.Future
 
 @Singleton()
-class CountriesController @Inject()(appConfig: AppConfig, cc: ControllerComponents)
+class CountriesController @Inject()(cc: ControllerComponents)
     extends BackendController(cc) {
 
   def countryList(): Action[AnyContent] = Action { implicit request =>

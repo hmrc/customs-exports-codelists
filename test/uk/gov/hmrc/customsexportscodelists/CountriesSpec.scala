@@ -37,8 +37,8 @@ class CountriesSpec extends WordSpec with MustMatchers {
 
     "return list of countries with both country name and country code" in {
 
-      val expectedList = allCountries.filter(c => c.countryName.isEmpty || c.countryCode.isEmpty)
-      expectedList must be(empty)
+      val listWithMissingValue = allCountries.filter(c => c.countryName.isEmpty || c.countryCode.isEmpty)
+      listWithMissingValue must be(empty)
     }
   }
 }

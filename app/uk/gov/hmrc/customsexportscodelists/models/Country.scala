@@ -18,8 +18,8 @@ package uk.gov.hmrc.customsexportscodelists.models
 
 import play.api.libs.json.Json
 
+case class Country(countryName: String, countryCode: String)
+
 case object Country {
   implicit val formats = Json.format[Country]
 }
-
-case class Country(countryName: String, countryCode: String)
