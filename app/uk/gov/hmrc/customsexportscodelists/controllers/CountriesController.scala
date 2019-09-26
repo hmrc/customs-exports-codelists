@@ -14,17 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.config
+package uk.gov.hmrc.customsexportscodelists.controllers
 
 import javax.inject.{Inject, Singleton}
-import play.api.Configuration
-import uk.gov.hmrc.play.bootstrap.config.ServicesConfig
+import play.api.libs.json.Json
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import uk.gov.hmrc.customsexportscodelists.Countries._
+import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-@Singleton
-class AppConfig @Inject()(config: Configuration, servicesConfig: ServicesConfig) {
 
-  val authBaseUrl: String = servicesConfig.baseUrl("auth")
+@Singleton()
+class CountriesController @Inject()(cc: ControllerComponents)
+    extends BackendController(cc) {
 
-  val auditingEnabled: Boolean = config.get[Boolean]("auditing.enabled")
-  val graphiteHost: String     = config.get[String]("microservice.metrics.graphite.host")
+  def countryList(): Action[AnyContent] = Action { implicit request =>
+    Ok(Json.toJson(allCountries))
+  }
 }
+
