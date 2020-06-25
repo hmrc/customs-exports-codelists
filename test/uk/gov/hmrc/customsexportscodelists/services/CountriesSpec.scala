@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists
+package uk.gov.hmrc.customsexportscodelists.services
 
 import org.scalatest.{MustMatchers, WordSpec}
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists
+package uk.gov.hmrc.customsexportscodelists.services
 
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsArray, JsString, Json}

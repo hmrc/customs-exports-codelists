@@ -14,20 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.controllers
+package uk.gov.hmrc.customsexportscodelists.services
 
-import javax.inject.{Inject, Singleton}
-import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import uk.gov.hmrc.customsexportscodelists.services.Countries
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import com.github.tototoshi.csv.CSVReader
+import uk.gov.hmrc.customsexportscodelists.models.AuthorisationCode
 
-@Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents)
-    extends BackendController(cc) {
+import scala.io.Source
 
-  def countryList(): Action[AnyContent] = Action { implicit request =>
-    Ok(Json.toJson(countries.allCountries))
+class AuthorisationCodes {
+
+  val allAuthorisationCodes: List[AuthorisationCode] = {
+    val reader =
+      CSVReader.open(Source.fromURL(getClass.getClassLoader.getResource("code-lists/holder-of-authorisation-codes.csv"), "UTF-8"))
+
+    val errors: List[List[String]] = reader.all()
+
+    errors.map(AuthorisationCode.apply)
   }
 }
-

@@ -19,15 +19,14 @@ package uk.gov.hmrc.customsexportscodelists.controllers
 import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
 import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import uk.gov.hmrc.customsexportscodelists.services.Countries
+import uk.gov.hmrc.customsexportscodelists.services.AuthorisationCodes
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 @Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents)
+class AuthorisationCodesController @Inject()(codes: AuthorisationCodes, cc: ControllerComponents)
     extends BackendController(cc) {
 
-  def countryList(): Action[AnyContent] = Action { implicit request =>
-    Ok(Json.toJson(countries.allCountries))
+  def authorisationCodesList(): Action[AnyContent] = Action { implicit request =>
+    Ok(Json.toJson(codes.allAuthorisationCodes))
   }
 }
-

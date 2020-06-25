@@ -14,20 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.controllers
+package uk.gov.hmrc.customsexportscodelists.models
 
-import javax.inject.{Inject, Singleton}
+import play.api.Logger
 import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import uk.gov.hmrc.customsexportscodelists.services.Countries
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-@Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents)
-    extends BackendController(cc) {
+case class AuthorisationCode(code: String)
 
-  def countryList(): Action[AnyContent] = Action { implicit request =>
-    Ok(Json.toJson(countries.allCountries))
+object AuthorisationCode {
+  private val logger = Logger(this.getClass)
+
+  def apply(data: List[String]): AuthorisationCode = data match {
+    case code :: Nil => AuthorisationCode(code)
+    case error =>
+      logger.warn("Incorrect data: " + error)
+      throw new IllegalArgumentException("Authorisation codes file has incorrect structure")
   }
-}
 
+  implicit val format = Json.format[AuthorisationCode]
+}

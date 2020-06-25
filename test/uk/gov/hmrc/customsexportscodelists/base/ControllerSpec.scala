@@ -14,20 +14,13 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.controllers
+package uk.gov.hmrc.customsexportscodelists.base
 
-import javax.inject.{Inject, Singleton}
-import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
-import uk.gov.hmrc.customsexportscodelists.services.Countries
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
+import org.scalatest.{MustMatchers, WordSpec}
+import play.api.mvc.AnyContentAsEmpty
+import play.api.test.FakeRequest
 
-@Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents)
-    extends BackendController(cc) {
+trait ControllerSpec extends WordSpec with MustMatchers {
 
-  def countryList(): Action[AnyContent] = Action { implicit request =>
-    Ok(Json.toJson(countries.allCountries))
-  }
+  def getRequest(): FakeRequest[AnyContentAsEmpty.type] = FakeRequest("GET", "url")
 }
-
