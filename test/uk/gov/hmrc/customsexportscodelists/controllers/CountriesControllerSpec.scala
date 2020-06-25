@@ -24,10 +24,7 @@ import uk.gov.hmrc.customsexportscodelists.services.Countries
 class CountriesControllerSpec extends ControllerSpec {
 
   private val countries = new Countries()
-  private val controller = new CountriesController(
-    countries,
-    stubControllerComponents()
-  )
+  private val controller = new CountriesController(countries, stubControllerComponents())
 
   "Authorisation Codes Controller" should {
 

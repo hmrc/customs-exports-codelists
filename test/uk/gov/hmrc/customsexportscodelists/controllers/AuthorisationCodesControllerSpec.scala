@@ -24,10 +24,7 @@ import uk.gov.hmrc.customsexportscodelists.services.AuthorisationCodes
 class AuthorisationCodesControllerSpec extends ControllerSpec {
 
   private val authorisationCodes = new AuthorisationCodes()
-  private val controller = new AuthorisationCodesController(
-    authorisationCodes,
-    stubControllerComponents()
-  )
+  private val controller = new AuthorisationCodesController(authorisationCodes, stubControllerComponents())
 
   "Authorisation Codes Controller" should {
 

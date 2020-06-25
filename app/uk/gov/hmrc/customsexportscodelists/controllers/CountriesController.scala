@@ -23,11 +23,9 @@ import uk.gov.hmrc.customsexportscodelists.services.Countries
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 @Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents)
-    extends BackendController(cc) {
+class CountriesController @Inject()(countries: Countries, cc: ControllerComponents) extends BackendController(cc) {
 
   def countryList(): Action[AnyContent] = Action { implicit request =>
     Ok(Json.toJson(countries.allCountries))
   }
 }
-

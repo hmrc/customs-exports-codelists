@@ -23,8 +23,7 @@ import uk.gov.hmrc.customsexportscodelists.services.AuthorisationCodes
 import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
 @Singleton
-class AuthorisationCodesController @Inject()(codes: AuthorisationCodes, cc: ControllerComponents)
-    extends BackendController(cc) {
+class AuthorisationCodesController @Inject()(codes: AuthorisationCodes, cc: ControllerComponents) extends BackendController(cc) {
 
   def authorisationCodesList(): Action[AnyContent] = Action { implicit request =>
     Ok(Json.toJson(codes.allAuthorisationCodes))
