@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,14 @@
 
 package uk.gov.hmrc.customsexportscodelists
 
+import javax.inject.{Inject, Singleton}
 import play.api.libs.json.{JsArray, JsString, Json}
 import uk.gov.hmrc.customsexportscodelists.models.Country
 
-object Countries {
+@Singleton
+class Countries @Inject()() {
   val allCountries: List[Country] = {
-    val jsonFile = getClass.getResourceAsStream("/location-autocomplete-canonical-list.json")
+    val jsonFile = getClass.getResourceAsStream("/code-lists/location-autocomplete-canonical-list.json")
 
     def fromJsonFile: List[Country] =
       Json.parse(jsonFile) match {
@@ -38,5 +40,4 @@ object Countries {
   }
 
   private def countryCode: String => String = cc => cc.split(":")(1).trim
-
 }
