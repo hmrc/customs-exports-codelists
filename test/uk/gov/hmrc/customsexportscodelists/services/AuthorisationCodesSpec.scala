@@ -26,7 +26,7 @@ class AuthorisationCodesSpec extends WordSpec with MustMatchers {
 
     "return the correct amount of codes" in {
 
-      val expectedAmount = 55
+      val expectedAmount = 54
 
       codes.allAuthorisationCodes.length mustBe expectedAmount
     }

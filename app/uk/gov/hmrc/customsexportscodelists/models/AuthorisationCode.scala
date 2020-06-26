@@ -19,7 +19,7 @@ package uk.gov.hmrc.customsexportscodelists.models
 import play.api.Logger
 import play.api.libs.json.Json
 
-case class AuthorisationCode(code: String)
+case class AuthorisationCode(value: String)
 
 object AuthorisationCode {
   private val logger = Logger(this.getClass)
