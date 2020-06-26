@@ -1,3 +1,5 @@
 # microservice specific routes
 
-GET        /countries               uk.gov.hmrc.customsexportscodelists.controllers.CountriesController.countryList
+GET        /countries               uk.gov.hmrc.customsexportscodelists.controllers.CountriesController.countryList()
+
+GET        /authorisation-codes     uk.gov.hmrc.customsexportscodelists.controllers.AuthorisationCodesController.authorisationCodesList()

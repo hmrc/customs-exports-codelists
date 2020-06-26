@@ -16,16 +16,24 @@
 
 package uk.gov.hmrc.customsexportscodelists.controllers
 
-import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
-import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import play.api.test.Helpers._
+import uk.gov.hmrc.customsexportscodelists.base.ControllerSpec
 import uk.gov.hmrc.customsexportscodelists.services.Countries
-import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-@Singleton
-class CountriesController @Inject()(countries: Countries, cc: ControllerComponents) extends BackendController(cc) {
+class CountriesControllerSpec extends ControllerSpec {
 
-  def countryList(): Action[AnyContent] = Action { implicit request =>
-    Ok(Json.toJson(countries.allCountries))
+  private val countries = new Countries()
+  private val controller = new CountriesController(countries, stubControllerComponents())
+
+  "Authorisation Codes Controller" should {
+
+    "return list of authorisation Codes" in {
+
+      val result = controller.countryList()(getRequest())
+
+      status(result) mustBe OK
+      contentAsJson(result) mustBe Json.toJson(countries.allCountries)
+    }
   }
 }

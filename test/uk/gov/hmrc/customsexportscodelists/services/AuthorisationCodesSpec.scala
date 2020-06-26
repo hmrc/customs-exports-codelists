@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.models
+package uk.gov.hmrc.customsexportscodelists.services
 
-import play.api.libs.json.Json
+import org.scalatest.{MustMatchers, WordSpec}
 
-case class Country(countryName: String, countryCode: String)
+class AuthorisationCodesSpec extends WordSpec with MustMatchers {
 
-case object Country {
-  implicit val formats = Json.format[Country]
+  val codes = new AuthorisationCodes()
+
+  "Authorisation codes" should {
+
+    "return the correct amount of codes" in {
+
+      val expectedAmount = 54
+
+      codes.allAuthorisationCodes.length mustBe expectedAmount
+    }
+  }
 }

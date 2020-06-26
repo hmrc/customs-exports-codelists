@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,31 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists
+package uk.gov.hmrc.customsexportscodelists.services
 
 import org.scalatest.{MustMatchers, WordSpec}
-import uk.gov.hmrc.customsexportscodelists.Countries.allCountries
 
 class CountriesSpec extends WordSpec with MustMatchers {
+
+  val countries = new Countries()
 
   "Countries" should {
 
     "return all countries with codes in alphabetical order of country name" in {
-      val sortedCountries = allCountries.sortBy(_.countryName)
+      val sortedCountries = countries.allCountries.sortBy(_.countryName)
 
-      allCountries mustBe sortedCountries
+      countries.allCountries mustBe sortedCountries
     }
 
     "return the correct amount of countries" in {
       val expectedAmount = 245
 
-      allCountries.length mustBe expectedAmount
+      countries.allCountries.length mustBe expectedAmount
     }
 
     "return list of countries with both country name and country code" in {
 
-      val listWithMissingValue = allCountries.filter(c => c.countryName.isEmpty || c.countryCode.isEmpty)
+      val listWithMissingValue = countries.allCountries.filter(c => c.countryName.isEmpty || c.countryCode.isEmpty)
       listWithMissingValue must be(empty)
     }
   }

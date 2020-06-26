@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.models
+package uk.gov.hmrc.customsexportscodelists.services
 
-import play.api.libs.json.Json
+import com.github.tototoshi.csv.CSVReader
+import uk.gov.hmrc.customsexportscodelists.models.AuthorisationCode
 
-case class Country(countryName: String, countryCode: String)
+import scala.io.Source
 
-case object Country {
-  implicit val formats = Json.format[Country]
+class AuthorisationCodes {
+
+  val allAuthorisationCodes: List[AuthorisationCode] = {
+    val reader =
+      CSVReader.open(Source.fromURL(getClass.getClassLoader.getResource("code-lists/holder-of-authorisation-codes.csv"), "UTF-8"))
+
+    val errors: List[List[String]] = reader.all()
+
+    errors.map(AuthorisationCode.apply)
+  }
 }

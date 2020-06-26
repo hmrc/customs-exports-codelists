@@ -16,10 +16,20 @@
 
 package uk.gov.hmrc.customsexportscodelists.models
 
+import play.api.Logger
 import play.api.libs.json.Json
 
-case class Country(countryName: String, countryCode: String)
+case class AuthorisationCode(value: String)
 
-case object Country {
-  implicit val formats = Json.format[Country]
+object AuthorisationCode {
+  private val logger = Logger(this.getClass)
+
+  def apply(data: List[String]): AuthorisationCode = data match {
+    case code :: Nil => AuthorisationCode(code)
+    case error =>
+      logger.warn("Incorrect data: " + error)
+      throw new IllegalArgumentException("Authorisation codes file has incorrect structure")
+  }
+
+  implicit val format = Json.format[AuthorisationCode]
 }

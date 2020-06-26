@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.customsexportscodelists.models
+package uk.gov.hmrc.customsexportscodelists.controllers
 
+import javax.inject.{Inject, Singleton}
 import play.api.libs.json.Json
+import play.api.mvc.{Action, AnyContent, ControllerComponents}
+import uk.gov.hmrc.customsexportscodelists.services.AuthorisationCodes
+import uk.gov.hmrc.play.bootstrap.controller.BackendController
 
-case class Country(countryName: String, countryCode: String)
+@Singleton
+class AuthorisationCodesController @Inject()(codes: AuthorisationCodes, cc: ControllerComponents) extends BackendController(cc) {
 
-case object Country {
-  implicit val formats = Json.format[Country]
+  def authorisationCodesList(): Action[AnyContent] = Action { implicit request =>
+    Ok(Json.toJson(codes.allAuthorisationCodes))
+  }
 }
